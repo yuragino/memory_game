@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>神経衰弱</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: whitesmoke;
+    }
+
+    h1 {
+      text-align: center;
+      margin: 20px;
+    }
+
+    #board {
+      margin: 20px;
+      display: grid;
+      grid-template-columns: repeat(4, 100px);
+      justify-content: center;
+      gap: 10px;
+    }
+
+    /* 全体のサイズ、枠、影、マージンなど */
+    .card {
+      /* カードの形 */
+      height: 100px;
+      width: 100px;
+      cursor: pointer;
+      /* 視点を設定。カメラが1000px離れている */
+      perspective: 1000px;
+    }
+
+    /* 実際に回転する部分*/
+    .card-inner {
+      position: relative;
+      /* .card と同じサイズにする（カードの中身がぴったり回転） */
+      width: 100%;
+      height: 100%;
+      /* 回転中に前面と背面を同時に立体的に見せる */
+      transform-style: preserve-3d;
+      transition: transform 0.6s;
+    }
+
+    /* .card.flippedクラスがついたカードのcard-innerに適用 */
+    .card.flipped .card-inner {
+      /* カードが flipped 状態のとき、中身を回転させる */
+      transform: rotateY(180deg);
+    }
+
+    /* 表と裏に共通の位置指定 */
+    .card-face {
+      position: absolute;
+      border: 2px solid grey;
+      /* box-shadow: 水平 垂直 ぼかし (拡がり) 色 */
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+      overflow: hidden;
+      /* .card-inner と同じサイズにする（表と裏が完全に重なる） */
+      width: 100%;
+      height: 100%;
+      /* 裏側を見えなくする */
+      backface-visibility: hidden;
+    }
+
+    /* 表面のデザイン */
+    .card-front {
+      background-color: white;
+      font-size: 2rem;
+      /* flexを使って縦・横の中央揃え */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      /* 初めは裏を向いていてほしい */
+      transform: rotateY(180deg);
+    }
+
+    /* 裏面のデザイン */
+    .card-back {
+      background-color: rgb(255, 255, 255);
+      background: linear-gradient(to bottom right, white, rgb(183, 200, 237));
+    }
+  </style>
+</head>
+
+<body>
+  <h1>神経衰弱ゲーム</h1>
+  <div id="board">
+    <!-- <div class="card">
+      <div class="card-inner">
+        <div class="card-front"></div> カードの模様が書いてある方
+        <div class="card-back"></div>
+      </div>
+    </div> -->
+  </div>
+<script src="script.js"></script>
+</body>
+
+</html>
